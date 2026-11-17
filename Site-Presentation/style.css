@@ -1,0 +1,49 @@
+:root{--t-glitch:#cf46c4;--y:#fcee0a;--c:#00f0ff;--p:#ff2a6d;--g:#39ff14;--bg:#05060a;--tx:#d6e4ff;--dim:#7d8aa8}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,"Courier New",monospace}
+#rain{position:fixed;inset:0;width:100%;height:100%;opacity:.22;z-index:0}
+.scan{position:fixed;inset:0;z-index:5;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.3) 0 1px,transparent 1px 3px);animation:fl 5s steps(2) infinite}
+@keyframes fl{50%{opacity:.75}}
+.term{text-align:center;position:relative;z-index:2;max-width:900px;margin:4vh auto;padding:0 22px 24px;background:rgba(5,6,10,.9);border:1px solid var(--c);
+clip-path:polygon(0 0,calc(100% - 26px) 0,100% 26px,100% 100%,26px 100%,0 calc(100% - 26px))}
+.led{height:4px;margin:0 -22px;background:linear-gradient(90deg,var(--y),var(--c),var(--p),var(--g),var(--y));background-size:300% 100%;animation:led 6s linear infinite}
+@keyframes led{to{background-position:-300% 0}}
+.bar{text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;color:var(--dim);border-bottom:1px dashed #223}
+.ctl button,nav button{font:inherit;background:none;color:var(--c);border:1px solid var(--c);padding:2px 10px;cursor:pointer}
+.ctl button{margin-left:6px;font-size:12px}
+.ctl button:hover,nav button:hover{background:var(--c);color:#000}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--y);outline-offset:2px}
+h1{margin:22px 0 0;font-size:clamp(28px,7vw,56px);line-height:1;letter-spacing:.04em;color:var(--y);text-shadow:0 0 12px rgba(252,238,10,.55)}
+.glitch{position:relative}
+.glitch::before,.glitch::after{content:attr(data-t);position:absolute;left:0;top:0;width:100%;overflow:hidden}
+.glitch::before{color:var(--t-glitch);text-shadow:none;clip-path:inset(0 0 60% 0);animation:g1 3.2s infinite steps(1)}
+.glitch::after{color:var(--c);text-shadow:none;clip-path:inset(55% 0 0 0);animation:g2 2.7s infinite steps(1)}
+@keyframes g1{0%,88%,100%{transform:translate(0)}90%{transform:translate(-4px,1px)}94%{transform:translate(3px,-1px)}}
+@keyframes g2{0%,80%,100%{transform:translate(0)}83%{transform:translate(4px,0)}87%{transform:translate(-3px,1px)}}
+.tag{margin:6px 0 14px;color:var(--p);text-shadow:0 0 8px var(--p);letter-spacing:.2em}
+nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:14px}
+nav button:nth-child(4n+1){--k:var(--c)}
+nav button:nth-child(4n+2){color:var(--y);border-color:var(--y)}
+nav button:nth-child(4n+2):hover{background:var(--y);color:#000}
+nav button:nth-child(4n+3){color:var(--p);border-color:var(--p)}
+nav button:nth-child(4n+3):hover{background:var(--p);color:#000}
+nav button:nth-child(4n){color:var(--g);border-color:var(--g)}
+nav button:nth-child(4n):hover{background:var(--g);color:#000}
+#out div{min-height:1.6em;white-space:pre-wrap;word-break:break-word;max-width:78ch;animation:in .25s both;animation-delay:var(--d,0s)}
+@keyframes in{from{opacity:0;transform:translateX(-6px)}}
+.h{color:var(--c);margin-top:14px;text-shadow:0 0 8px rgba(0,240,255,.6)}
+.b,.l{text-align:left}#out{text-align:left}.b{padding-left:2ch;text-indent:-2ch}
+.b::before{content:"> ";color:var(--p)}
+.k{color:var(--y)}
+.ok{color:var(--g)}
+.er{color:var(--p)}
+.cmd{color:var(--dim)}
+a{color:var(--g)}
+.prompt{display:flex;justify-content:flex-start;gap:8px;margin-top:16px;align-items:center}
+.prompt label{color:var(--g);white-space:nowrap}
+input{flex:1;min-width:0;background:none;border:0;border-bottom:1px solid #223;color:var(--y);font:inherit;caret-color:var(--p)}
+.nofx .scan,.nofx .led,.nofx .glitch::before,.nofx .glitch::after{animation:none}
+.nofx .glitch::before,.nofx .glitch::after{display:none}
+.nofx #out div{animation:none}
+@media (prefers-reduced-motion:reduce){.scan,.led,.glitch::before,.glitch::after,#out div{animation:none}.glitch::before,.glitch::after{display:none}}
+@media (max-width:520px){html,body{font-size:14px}.term{margin:0;padding:0 14px 20px;min-height:100vh}.led{margin:0 -14px}}
